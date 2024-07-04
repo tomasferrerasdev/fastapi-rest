@@ -1,8 +1,12 @@
 from typing import Union
 from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
+from routes import users
 
 app = FastAPI()
+app.router.include_router(users.router)
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 
 class Item(BaseModel):
@@ -14,13 +18,3 @@ class Item(BaseModel):
 @app.get("/")
 async def root():
     return "Hello FastAPI"
-
-
-@app.get("/url")
-async def url():
-    return {"url": "https://tomasferreras.com"}
-
-
-@app.post("/items/")
-async def create_item(item: Item):
-    return item
