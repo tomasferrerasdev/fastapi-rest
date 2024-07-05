@@ -11,7 +11,7 @@ SECRET_KEY = "0f52fc5682abf3f293ae577dc6f85d1679c78457a1d05853bd6be23efdf58dde"
 router = APIRouter()
 oauth2 = OAuth2PasswordBearer(tokenUrl="login")
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-ACCESS_TOKEN_EXPIRE_MINUTES = 1
+ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
 
 def verify_password(plain_password, hashed_password):
